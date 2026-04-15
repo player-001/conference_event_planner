@@ -9,6 +9,7 @@ const ConferenceEvent = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const venueItems = useSelector((state) => state.venue);
     const avItems = useSelector((state) => state.av)
+    const mealsItems = useSelector((state) => state.meals)
     const dispatch = useDispatch();
     const remainingAuditoriumQuantity = 3 - venueItems.find(item => item.name === "Auditorium Hall (Capacity:200)").quantity;
 
@@ -201,7 +202,19 @@ const ConferenceEvent = () => {
                                 </div>
 
                                 <div className="input-container venue_selection">
-
+                                    <label htmlfor="numberOfPeople"><h3>Number Of People:</h3></label>
+                                    <input type = "number" className="input_box5" id = "numberOfPeople" value = {numberOfPeople}
+                                    onChange = {(e) => {
+                                        const value = parseInt(e.target.value)
+                                        if (isNaN(value) || value < 1){
+                                            setNumberOfPeople(1)
+                                        }
+                                        else{
+                                            setNumberOfPeople(value)
+                                        }
+                                    }} 
+                                    min="1"
+                                    /
                                 </div>
                                 <div className="meal_selection">
 
